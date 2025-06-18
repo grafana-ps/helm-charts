@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tns-helm-chart.fullname" . }}-db
+  labels:
+    {{- include "tns-helm-chart.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.db.service.type }}
+  ports:
+    - port: {{ .Values.db.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "tns-helm-chart.selectorLabels" . | nindent 4 }}
