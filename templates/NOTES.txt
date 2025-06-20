@@ -1,1 +1,0 @@
-The TNS App, DB, and Loaggen are now deployed.
