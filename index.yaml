@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  tns:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2025-06-20T17:21:43.628009166Z"
+    description: A Helm chart for the Grafana TNS O11y Demo App
+    digest: 406b9d16ce2e0f28b2a15611e1799c9f28082d554153d4cca8f28f67679ed86d
+    name: tns
+    type: application
+    urls:
+    - https://github.com/grafana-ps/helm-charts/releases/download/tns-1.0.0/tns-1.0.0.tgz
+    version: 1.0.0
+generated: "2025-06-20T17:21:43.628020117Z"
