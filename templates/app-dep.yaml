@@ -43,15 +43,6 @@ spec:
           ports:
             - name: http
               containerPort: {{ .Values.app.service.port }}
-              protocol: TCP
-          {{- with .Values.app.livenessProbe }}
-          livenessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
-          {{- with .Values.app.readinessProbe }}
-          readinessProbe:
-            {{- toYaml . | nindent 12 }}
-          {{- end }}
           {{- with .Values.app.resources }}
           resources:
             {{- toYaml . | nindent 12 }}

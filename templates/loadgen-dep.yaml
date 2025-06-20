@@ -1,68 +1,69 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "tns-helm-chart.fullname" . }}-db
+  name: {{ include "tns-helm-chart.fullname" . }}-loadgen
   labels:
     {{- include "tns-helm-chart.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.db.replicaCount }}
+  replicas: {{ .Values.loadgen.replicaCount }}
   selector:
     matchLabels:
       {{- include "tns-helm-chart.selectorLabels" . | nindent 6 }}
   template:
     metadata:
-      {{- with .Values.db.podAnnotations }}
+      {{- with .Values.loadgen.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
         {{- include "tns-helm-chart.labels" . | nindent 8 }}
-        {{- with .Values.db.podLabels }}
+        {{- with .Values.loadgen.podLabels }}
         {{- toYaml . | nindent 8 }}
         {{- end }}
     spec:
-      {{- with .Values.db.imagePullSecrets }}
+      {{- with .Values.loadgen.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.db.podSecurityContext }}
+      {{- with .Values.loadgen.podSecurityContext }}
       securityContext:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- with .Values.db.securityContext }}
+          {{- with .Values.loadgen.securityContext }}
           securityContext:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          image: "{{ .Values.db.image.repository }}:{{ .Values.db.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.db.image.pullPolicy }}
+          image: "{{ .Values.loadgen.image.repository }}:{{ .Values.loadgen.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.loadgen.image.pullPolicy }}
           args:
             - -log.level=debug
+            - http://{{ include "tns-helm-chart.fullname" . }}-app
           ports:
             - name: http
-              containerPort: {{ .Values.db.service.port }}
-          {{- with .Values.db.resources }}
+              containerPort: {{ .Values.loadgen.service.port }}
+          {{- with .Values.loadgen.resources }}
           resources:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-          {{- with .Values.db.volumeMounts }}
+          {{- with .Values.loadgen.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
           {{- end }}
-      {{- with .Values.db.volumes }}
+      {{- with .Values.loadgen.volumes }}
       volumes:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.db.nodeSelector }}
+      {{- with .Values.loadgen.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.db.affinity }}
+      {{- with .Values.loadgen.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.db.tolerations }}
+      {{- with .Values.loadgen.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}

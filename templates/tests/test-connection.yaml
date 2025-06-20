@@ -11,5 +11,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['{{ include "tns-helm-chart.fullname" . }}:{{ .Values.service.port }}']
+      args: ['{{ include "tns-helm-chart.fullname" . }}-app:{{ .Values.app.service.port }}']
   restartPolicy: Never

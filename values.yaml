@@ -18,7 +18,7 @@ app:
   securityContext: {}
 
   service:
-    type: ClusterIP
+    type: NodePort
     port: 80
 
   resources: {}
@@ -26,11 +26,11 @@ app:
   livenessProbe:
     httpGet:
       path: /
-      port: http
+      port: http-metrics
   readinessProbe:
     httpGet:
       path: /
-      port: http
+      port: http-metrics
 
   nodeSelector: {}
 
@@ -66,11 +66,51 @@ db:
   livenessProbe:
     httpGet:
       path: /
-      port: http
+      port: http-metrics
   readinessProbe:
     httpGet:
       path: /
-      port: http
+      port: http-metrics
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+loadgen:
+  replicaCount: 1
+
+  image:
+    repository: grafana/tns-loadgen
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  podAnnotations: {}
+  podLabels: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  resources: {}
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http-metrics
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http-metrics
 
   nodeSelector: {}
 

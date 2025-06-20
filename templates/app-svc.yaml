@@ -9,7 +9,7 @@ spec:
   ports:
     - port: {{ .Values.app.service.port }}
       targetPort: http
+      nodePort: 30030
       protocol: TCP
-      name: http
   selector:
     {{- include "tns-helm-chart.selectorLabels" . | nindent 4 }}
