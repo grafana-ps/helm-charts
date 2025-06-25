@@ -23,7 +23,7 @@ git clone https://github.com/pbmoses/copyblocks-helm.git
 helm install copyblocks -f values.yaml -n copyblocks .
 ```
 
-## Working as of today but improvements to come. Sample logs:
+## Sample logs:
 ```
 level=info ts=2024-11-17T22:16:53.278125776Z tenantID=__system__ block=01FCJ34990X7RH3ES0RDE9P2EV block_min_time=2021-08-07T00:00:00.481Z block_max_time=2021-08-08T00:00:00Z msg="copying block"
 level=info ts=2024-11-17T22:16:53.304578002Z tenantID=__system__ block=01FCQ7QFFCXCKJX61T9B7NGVVE block_min_time=2021-08-09T00:00:00.48Z block_max_time=2021-08-10T00:00:00Z msg="copying block"
