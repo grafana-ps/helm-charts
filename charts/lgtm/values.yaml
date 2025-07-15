@@ -1,0 +1,122 @@
+opentelemetry:
+  url: ""
+
+api:
+  replicaCount: 1
+
+  image:
+    repository: umamialex/lgtm-api
+    pullPolicy: Always
+    tag: "latest"
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  podAnnotations: {}
+  podLabels: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  resources: {}
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+authenticator:
+  replicaCount: 1
+
+  image:
+    repository: umamialex/lgtm-authenticator
+    pullPolicy: Always
+    tag: "latest"
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  podAnnotations: {}
+  podLabels: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  resources: {}
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+loadGenerator:
+  replicaCount: 1
+
+  image:
+    repository: umamialex/lgtm-load-generator
+    pullPolicy: Always
+    tag: "latest"
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  podAnnotations: {}
+  podLabels: {}
+
+  podSecurityContext: {}
+
+  securityContext: {}
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  resources: {}
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}

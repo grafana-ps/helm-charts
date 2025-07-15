@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "lgtm-helm-chart.fullname" . }}-load-generator
+  labels:
+    {{- include "lgtm-helm-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.loadGenerator.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "lgtm-helm-chart.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: load-generator
+  template:
+    metadata:
+      {{- with .Values.loadGenerator.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "lgtm-helm-chart.labels" . | nindent 8 }}
+        app.kubernetes.io/component: load-generator
+        {{- with .Values.loadGenerator.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.loadGenerator.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.loadGenerator.podSecurityContext }}
+      securityContext:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: {{ .Chart.Name }}
+          {{- with .Values.loadGenerator.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          image: "{{ .Values.loadGenerator.image.repository }}:{{ .Values.loadGenerator.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.loadGenerator.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: DEBUG
+              value: "*"
+            - name: OTLP_URL
+              value: "{{ .Values.opentelemetry.url }}"
+            - name: LGTM_API
+              value: 'http://{{ include "lgtm-helm-chart.fullname" . }}-api'
+          {{- with .Values.loadGenerator.resources }}
+          resources:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+          {{- with .Values.loadGenerator.volumeMounts }}
+          volumeMounts:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.loadGenerator.volumes }}
+      volumes:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.loadGenerator.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.loadGenerator.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.loadGenerator.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
