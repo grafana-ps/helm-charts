@@ -3,6 +3,16 @@ entries:
   lgtm:
   - apiVersion: v2
     appVersion: latest
+    created: "2025-09-02T15:19:26.524295976Z"
+    description: A Helm chart for the Grafana LGTM o11y demo app.
+    digest: b5a38f6521b534c16f2e536657bf91cd15158549cb7ebf3c9bb84c20a1026e94
+    name: lgtm
+    type: application
+    urls:
+    - https://github.com/grafana-ps/helm-charts/releases/download/lgtm-0.1.2/lgtm-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: latest
     created: "2025-08-15T18:06:00.900698623Z"
     description: A Helm chart for the Grafana LGTM o11y demo app.
     digest: f864e2d116ab56e892d1c400094489d39220e8d344d9459622dee8d8b09453a6
@@ -32,4 +42,4 @@ entries:
     urls:
     - https://github.com/grafana-ps/helm-charts/releases/download/tns-1.0.0/tns-1.0.0.tgz
     version: 1.0.0
-generated: "2025-08-15T18:06:00.900711407Z"
+generated: "2025-09-02T15:19:26.524309601Z"
