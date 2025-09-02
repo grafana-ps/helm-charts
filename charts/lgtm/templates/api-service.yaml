@@ -10,6 +10,7 @@ spec:
     - port: {{ .Values.api.service.port }}
       targetPort: http
       protocol: TCP
+      nodePort: {{ .Values.api.service.nodePort }}
   selector:
     {{- include "lgtm-helm-chart.selectorLabels" . | nindent 4 }}
     app.kubernetes.io/component: api
